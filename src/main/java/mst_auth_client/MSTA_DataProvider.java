@@ -16,16 +16,12 @@ import mst_auth_library.MST_Auth_BaseClientWrapper;
 import mst_auth_library.MST_Auth_BaseServlet;
 import mst_auth_library.MST_Auth_ClientWrapper;
 import mst_auth_library.MST_Auth_Servlet;
+import mst_auth_library.MST_Auth_Microservice;
 
-public class MST_Auth_Client {
-	private MST_Auth_BaseClientWrapper msta_library;
-	public MST_Auth_Client() {
-	}
-	public void SetLibrary (MST_Auth_BaseClientWrapper MSTALibrary ) {
-		msta_library = MSTALibrary;			
+public class MSTA_DataProvider extends MST_Auth_Microservice {
+	public MSTA_DataProvider() {
 	}
 	public void doGet(HttpServletRequest request, HttpServletResponse response, String trustedbody) throws IOException, MSTAException {
-		//System.out.println("Data doPost");
 		String input;
 		if (trustedbody == null)
 			input = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
@@ -38,17 +34,5 @@ public class MST_Auth_Client {
 			throw(new MSTAException (": InterruptedException" + ie));		
 		}						  
 		response.getWriter().append(input);
-	}
-	public void doPost(HttpServletRequest request, HttpServletResponse response, String trustedbody) throws IOException, MSTAException  {
-	    response.getWriter().append("doPut Served at: ").append(request.getContextPath());
-	}
-	public void doPut(HttpServletRequest request, HttpServletResponse response, String trustedbody) throws IOException, MSTAException  {
-	    response.getWriter().append("doPut Served at: ").append(request.getContextPath());
-	}
-	public void doDelete(HttpServletRequest request, HttpServletResponse response, String trustedbody) throws IOException, MSTAException  {
-	    response.getWriter().append("doDelete Served at: ").append(request.getContextPath());
-	}
-	public void callbackResponse(HttpResponse<String> parmmstresponse) {
-		
 	}
 }
